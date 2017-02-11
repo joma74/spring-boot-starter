@@ -11,11 +11,12 @@ public class SkillsDTO {
         return skills;
     }
 
-    public void setSkills(ValidListDTO<String> skills) {
-        this.skills = skills;
+    public void replaceSkills(SkillsDTO param) {
+        this.skills.clear();
+        this.skills.addAll(param.getSkills());
     }
 
-    public void add(SkillsDTO param) {
+    public void addSkills(SkillsDTO param) {
         this.skills.addAll(param.getSkills());
     }
 }

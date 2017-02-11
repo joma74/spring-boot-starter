@@ -2,27 +2,46 @@ package at.joma.playground.starter.vuejs;
 
 import at.joma.playground.starter.vuejs.dto.SkillsDTO;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
 @Controller
+@CrossOrigin
+@SessionAttributes(SkillsController.SKILLS)
 public class SkillsController {
 
-    private static SkillsDTO skills = new SkillsDTO();
+    public static final String SKILLS = "skills";
 
-    @RequestMapping(value = "/api/skills", method = RequestMethod.GET)
+    @ModelAttribute(SKILLS)
+    public SkillsDTO skills() {
+        return new SkillsDTO();
+    }
+
+    @RequestMapping(value = "/api/" + SKILLS, method = RequestMethod.GET)
     @ResponseBody
-    public SkillsDTO getAll() {
+    public SkillsDTO getSkills(@ApiIgnore ModelMap model) {
+        RequestContextHolder.currentRequestAttributes().getSessionId();
+        SkillsDTO skills = (SkillsDTO) model.get(SKILLS);
         return skills;
     }
 
-    @RequestMapping(value = "/api/skills", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/" + SKILLS, method = RequestMethod.PUT)
     @ResponseBody
-    public void put(@Valid @RequestBody SkillsDTO param) {
-        skills.add(param);
+    public void putSkills(@Valid @RequestBody SkillsDTO param, @ApiIgnore ModelMap model) {
+        RequestContextHolder.currentRequestAttributes().getSessionId();
+        SkillsDTO skills = (SkillsDTO) model.get(SKILLS);
+        skills.addSkills(param);
+    }
+
+    @RequestMapping(value = "/api/" + SKILLS, method = RequestMethod.POST)
+    @ResponseBody
+    public void postSkills(@Valid @RequestBody SkillsDTO param, @ApiIgnore ModelMap model) {
+        RequestContextHolder.currentRequestAttributes().getSessionId();
+        SkillsDTO skills = (SkillsDTO) model.get(SKILLS);
+        skills.replaceSkills(param);
     }
 }
