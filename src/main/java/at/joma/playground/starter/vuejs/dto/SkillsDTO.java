@@ -2,6 +2,8 @@ package at.joma.playground.starter.vuejs.dto;
 
 import at.joma.playground.starter.vuejs.validators.NotEmptyElements;
 
+import java.util.Arrays;
+
 public class SkillsDTO {
 
     @NotEmptyElements
@@ -18,5 +20,9 @@ public class SkillsDTO {
 
     public void addSkills(SkillsDTO param) {
         this.skills.addAll(param.getSkills());
+    }
+
+    public void addSkills(String... skill) {
+        this.skills.addAll(Arrays.asList(skill));
     }
 }

@@ -18,7 +18,9 @@ public class SkillsController {
 
     @ModelAttribute(SKILLS)
     public SkillsDTO skills() {
-        return new SkillsDTO();
+        SkillsDTO newSkills = new SkillsDTO();
+        newSkills.addSkills("dev");
+        return newSkills;
     }
 
     @RequestMapping(value = "/api/" + SKILLS, method = RequestMethod.GET)
