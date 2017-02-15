@@ -4,15 +4,15 @@ public class FieldErrorDTO {
 
     private String field;
 
-    private String message;
+    private String error;
 
-    public String getMessage() {
-        return message;
+    public String getError() {
+        return error;
     }
 
-    public FieldErrorDTO(String field, String message) {
+    public FieldErrorDTO(String field, String error) {
         this.field = field;
-        this.message = message;
+        this.error = error;
     }
 
     public String getField() {
