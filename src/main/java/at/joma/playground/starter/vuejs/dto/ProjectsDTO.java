@@ -16,4 +16,8 @@ public class ProjectsDTO {
     public void addProject(ProjectDTO param) {
         this.projects.add(param);
     }
+
+    public boolean removeProject(String projectKey) {
+        return this.projects.removeIf(project -> projectKey.equals(project.getKey()));
+    }
 }
